@@ -1,6 +1,8 @@
 const baseUrl = "http://localhost:3000";
 const apiUrl = baseUrl + "/api";
 
+// Hämtar alla meddelanden från servern
+// Returnerar null om vi inte fick ett svar
 async function getMessages() {
     try {
         const response = await fetch(apiUrl + "/messages");
@@ -9,12 +11,15 @@ async function getMessages() {
         }
         const result = await response.json();
         console.log(result.messages);
+        return result.messages;
     }
     catch(error) {
         console.error(error.message);
     }
+    return null;
 }
 
+// Skapa ett meddelande objekt
 function createMessage(username, message) {
     return {
         user: username,
@@ -22,7 +27,8 @@ function createMessage(username, message) {
     };
 }
 
-async function postMsg(msg) {
+// Posta ett meddelande till servern
+async function postMessage(msg) {
     try {
         const response = await fetch(apiUrl + "/messages", {
             method: "POST",
