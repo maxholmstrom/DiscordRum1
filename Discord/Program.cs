@@ -14,7 +14,8 @@ var messages = new List<MessageDto>(){
     new("danne", "hej", 100600660),
     new("lennart", "och hå", 1296867189),
     new("xX_Gandalf_Xx", "YOU SHALL NOT POST!", 192837198),
-    new("birgitta69", "är nån vaken?", 19283795810)
+    new("birgitta69", "är nån vaken?", 19283795810),
+    new("danne", "@birgitta69 jo, jag är vaken", 19283795811)
 };
 
 // Get för meddelanden
