@@ -1,8 +1,11 @@
 console.log("Hello world!");
 
+const baseUrl = "http://localhost:3000";
+const apiUrl = baseUrl + "/api";
+
 async function testGet() {
     try {
-        const response = await fetch("http://localhost:3000/api/test");
+        const response = await fetch(apiUrl + "/test");
         if (!response.ok) {
               throw new Error(`Response status: ${response.status}`);
         }
@@ -23,7 +26,7 @@ function createMessage(username, message) {
 
 async function postMsg(msg) {
     try {
-        const response = await fetch("http://localhost:3000/api/messages", {
+        const response = await fetch(apiUrl + "/messages", {
             method: "POST",
             body: JSON.stringify(msg),
             headers: {
