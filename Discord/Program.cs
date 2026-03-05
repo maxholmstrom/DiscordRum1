@@ -19,7 +19,7 @@ app.MapGet("/api/messages", () => new { messages });
 // Post för meddelanden
 app.MapPost("/api/messages", async (MessageDto msg) =>
 {
-    Console.WriteLine($"{msg.User}: {msg.Message}");
+    messages.Add(msg);
 });
 
 //app.MapGet("/index.html", () => "Hello World!");
