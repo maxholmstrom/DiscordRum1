@@ -1,0 +1,40 @@
+body {
+    font-family: Arial;
+    background-color: #bbb9b9;    
+    border-radius: 5px;
+    
+}
+
+header {
+    background-color: #e1dfdf;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border-radius: 8px;
+}
+
+h1 {
+    text-shadow: 2px 1px 2px black;
+    color: #000000;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.paper {
+    background: #e1dfdf;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.messages div {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+
+}
