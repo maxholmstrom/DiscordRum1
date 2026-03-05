@@ -25,6 +25,16 @@ app.MapPost("/api/messages", async (MessageDto msg) =>
 {
     Console.WriteLine($"msg post: {msg.User} {msg.Time}: {msg.Message}");
     messages.Add(msg);
+    if (string.IsNullOrWhiteSpace(msg.Message))
+        return Results.BadRequest(new { error = "message får inte vara tom." });
+
+    var user = string.IsNullOrWhiteSpace(msg.User) ? "Anonymous" : msg.User.Trim();
+    var message = msg.Message.TrimEnd();
+
+    var saved = new MessageDto(user, message);
+    messages.Add(saved);
+
+    return Results.Ok(saved);
 });
 
 app.Run("http://localhost:3000");
