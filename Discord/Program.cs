@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 var app = builder.Build();
 app.UseFileServer();
 
-app.MapGet("/api/test", () => "test get!");
+app.MapGet("/api/test", () => new { message = "test" });
 
 //app.MapGet("/index.html", () => "Hello World!");
 app.Run("http://localhost:3000");
