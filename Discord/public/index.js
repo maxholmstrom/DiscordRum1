@@ -1,5 +1,6 @@
 const baseUrl = "http://localhost:3000";
 const apiUrl = baseUrl + "/api";
+const messagePollingRateMs = 2000;
 
 const sendBtn = document.getElementById("sendBtn");
 const nameInput = document.getElementById("nameInput");
@@ -16,7 +17,7 @@ async function getMessages() {
         }
         const result = await response.json();
         console.log(result.messages);
-        displayMessages(result.messages);
+        return result.messages;
     }
     catch(error) {
         console.error(error.message);
@@ -28,7 +29,8 @@ async function getMessages() {
 function createMessage(username, message) {
     return {
         user: username,
-        message: message
+        message: message,
+        time: Date.now()
     };
 }
 
@@ -54,9 +56,12 @@ async function postMessage(msg) {
 
 function displayMessages(allMessages ) {
     var messagesContainer = document.querySelector(".messages");
+    messagesContainer.innerHTML = "";
     allMessages .forEach(msg => {
+        const date = new Date(msg.time * 1000);
+        const formattedDate = date.toLocaleDateString("sv-SE");
         var message = document.createElement("div");
-        message.innerHTML = `${msg.user}: ${msg.message}`;
+        message.innerHTML = `${msg.user} ${formattedDate.toString()}: ${msg.message}`;
         messagesContainer.appendChild(message);
     });
 }
@@ -94,3 +99,10 @@ messageInput.addEventListener("keydown", async (e) => {
 });
 
 getMessages().catch(console.error);
+async function pollMessages() {
+    const messages = await getMessages();
+    displayMessages(messages);
+    setTimeout(pollMessages, messagePollingRateMs);
+}
+
+pollMessages();
