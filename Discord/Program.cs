@@ -19,6 +19,7 @@ app.MapGet("/api/messages", () => new { messages });
 // Post för meddelanden
 app.MapPost("/api/messages", async (MessageDto msg) =>
 {
+    Console.WriteLine($"msg post: {msg.User}: {msg.Message}");
     messages.Add(msg);
 });
 
