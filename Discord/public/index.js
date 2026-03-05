@@ -11,7 +11,7 @@ async function getMessages() {
         }
         const result = await response.json();
         console.log(result.messages);
-        return result.messages;
+        displayMessages(result.messages);
     }
     catch(error) {
         console.error(error.message);
@@ -45,6 +45,15 @@ async function postMessage(msg) {
     catch(error) {
         console.error(error.message);
     }
+}
+
+function displayMessages(allMessages ) {
+    var messagesContainer = document.querySelector(".messages");
+    allMessages .forEach(msg => {
+        var message = document.createElement("div");
+        message.innerHTML = `${msg.user}: ${msg.message}`;
+        messagesContainer.appendChild(message);
+    });
 }
 
 getMessages();
