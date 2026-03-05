@@ -3,7 +3,6 @@ using Discord;
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
     Args = args,
-    // Look for static files in webroot
     WebRootPath = "public"
 });
 
@@ -23,5 +22,4 @@ app.MapPost("/api/messages", async (MessageDto msg) =>
     messages.Add(msg);
 });
 
-//app.MapGet("/index.html", () => "Hello World!");
 app.Run();
