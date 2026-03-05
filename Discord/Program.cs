@@ -24,4 +24,4 @@ app.MapPost("/api/messages", async (MessageDto msg) =>
     messages.Add(msg);
 });
 
-app.Run();
+app.Run("http://localhost:3000");
