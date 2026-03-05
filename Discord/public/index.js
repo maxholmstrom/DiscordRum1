@@ -3,14 +3,14 @@ console.log("Hello world!");
 const baseUrl = "http://localhost:3000";
 const apiUrl = baseUrl + "/api";
 
-async function testGet() {
+async function getMessages() {
     try {
-        const response = await fetch(apiUrl + "/test");
+        const response = await fetch(apiUrl + "/messages");
         if (!response.ok) {
               throw new Error(`Response status: ${response.status}`);
         }
         const result = await response.json();
-        console.log(result);
+        console.log(result.messages);
     }
     catch(error) {
         console.error(error.message);
@@ -36,13 +36,11 @@ async function postMsg(msg) {
         if (!response.ok) {
               throw new Error(`Response status: ${response.status}`);
         }
-        const result = await response.json();
-        console.log(result);
+        console.log(`Post message status: ${response.status}`);
     }
     catch(error) {
         console.error(error.message);
     }
 }
 
-testGet();
-postMsg(createMessage("bingus", "hata floppa >:("));
+getMessages();
