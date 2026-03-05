@@ -1,5 +1,6 @@
 const baseUrl = "http://localhost:3000";
 const apiUrl = baseUrl + "/api";
+const messagePollingRateMs = 2000;
 
 // Hämtar alla meddelanden från servern
 // Returnerar null om vi inte fick ett svar
@@ -11,7 +12,7 @@ async function getMessages() {
         }
         const result = await response.json();
         console.log(result.messages);
-        displayMessages(result.messages);
+        return result.messages;
     }
     catch(error) {
         console.error(error.message);
@@ -50,6 +51,7 @@ async function postMessage(msg) {
 
 function displayMessages(allMessages ) {
     var messagesContainer = document.querySelector(".messages");
+    messagesContainer.innerHTML = "";
     allMessages .forEach(msg => {
         var message = document.createElement("div");
         message.innerHTML = `${msg.user}: ${msg.message}`;
@@ -57,4 +59,10 @@ function displayMessages(allMessages ) {
     });
 }
 
-getMessages();
+async function pollMessages() {
+    const messages = await getMessages();
+    displayMessages(messages);
+    setTimeout(pollMessages, messagePollingRateMs);
+}
+
+pollMessages();
