@@ -1,3 +1,5 @@
+using Discord;
+
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
     Args = args,
@@ -8,7 +10,11 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 var app = builder.Build();
 app.UseFileServer();
 
-app.MapGet("/api/test", () => new { message = "test" });
+var messages = new List<MessageDto>(){
+    new MessageDto("danne", "hej")
+};
+
+app.MapGet("/api/messages", () => new { messages });
 
 //app.MapGet("/index.html", () => "Hello World!");
 app.Run("http://localhost:3000");
