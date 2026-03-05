@@ -1,5 +1,3 @@
-console.log("Hello world!");
-
 const baseUrl = "http://localhost:3000";
 const apiUrl = baseUrl + "/api";
 
