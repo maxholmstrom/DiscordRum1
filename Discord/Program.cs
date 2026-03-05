@@ -11,10 +11,10 @@ var app = builder.Build();
 app.UseFileServer(); // använd statiska filer
 
 var messages = new List<MessageDto>(){
-    new("danne", "hej"),
-    new("lennart", "och hå"),
-    new("xX_Gandalf_Xx", "YOU SHALL NOT POST!"),
-    new("birgitta69", "är nån vaken?")
+    new("danne", "hej", 100600660),
+    new("lennart", "och hå", 1296867189),
+    new("xX_Gandalf_Xx", "YOU SHALL NOT POST!", 192837198),
+    new("birgitta69", "är nån vaken?", 19283795810)
 };
 
 // Get för meddelanden
