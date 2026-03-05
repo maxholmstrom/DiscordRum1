@@ -23,7 +23,8 @@ async function getMessages() {
 function createMessage(username, message) {
     return {
         user: username,
-        message: message
+        message: message,
+        time: Date.now()
     };
 }
 
