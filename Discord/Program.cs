@@ -16,5 +16,11 @@ var messages = new List<MessageDto>(){
 
 app.MapGet("/api/messages", () => new { messages });
 
+// Post för meddelanden
+app.MapPost("/api/messages", async (MessageDto msg) =>
+{
+    Console.WriteLine($"{msg.User}: {msg.Message}");
+});
+
 //app.MapGet("/index.html", () => "Hello World!");
 app.Run("http://localhost:3000");
