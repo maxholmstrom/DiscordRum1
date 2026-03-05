@@ -24,4 +24,4 @@ app.MapPost("/api/messages", async (MessageDto msg) =>
 });
 
 //app.MapGet("/index.html", () => "Hello World!");
-app.Run("http://localhost:3000");
+app.Run();
