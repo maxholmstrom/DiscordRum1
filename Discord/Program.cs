@@ -31,9 +31,12 @@ app.MapPost("/api/messages", async (MessageDto msg) =>
     var user = string.IsNullOrWhiteSpace(msg.User) ? "Anonymous" : msg.User.Trim();
     var message = msg.Message.TrimEnd();
 
-    Console.WriteLine($"msg post: {msg.User} {msg.Time}: {msg.Message}");
+    // Ta fram unixtiden
+    long time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
-    var saved = new MessageDto(user, message, msg.Time);
+    Console.WriteLine($"msg post: {msg.User} {time}: {msg.Message}");
+
+    var saved = new MessageDto(user, message, time);
     messages.Add(saved);
 
     return Results.Ok(saved);
