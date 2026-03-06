@@ -19,10 +19,12 @@ var messages = new List<MessageDto>(){
     new("max", "@danne snacka inte med min brud!", 19283795811),
 };
 
+var globalCts = new CancellationTokenSource();
+
 // Get för meddelanden
 app.MapGet("/api/messages", async (HttpRequest request, CancellationToken ct) =>
 {
-    using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct, app.Lifetime.ApplicationStopping);
+    using var cts = CancellationTokenSource.CreateLinkedTokenSource(globalCts.Token, app.Lifetime.ApplicationStopping);
 
     if (request.Headers.TryGetValue("X-Poll", out var value) && value == "yes")
     {
@@ -49,6 +51,9 @@ app.MapPost("/api/messages", async (MessageDto msg) =>
 
     var saved = new MessageDto(user, message, time);
     messages.Add(saved);
+
+    globalCts.Cancel();
+    globalCts = new CancellationTokenSource();
 
     return Results.Ok(saved);
 });
