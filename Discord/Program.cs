@@ -10,13 +10,18 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 var app = builder.Build();
 app.UseFileServer(); // använd statiska filer
 
+static long ToUnixTime(DateTime dt)
+{
+    return ((DateTimeOffset)dt).ToUnixTimeMilliseconds();
+}
+
 var messages = new List<MessageDto>(){
-    new("danne", "hej", 100600660),
-    new("lennart", "och hå", 1296867189),
-    new("xX_Gandalf_Xx", "YOU SHALL NOT POST!", 192837198),
-    new("birgitta69", "är nån vaken?", 19283795810),
-    new("danne", "@birgitta69 jo, jag är vaken", 19283795811),
-    new("max", "@danne snacka inte med min brud!", 19283795811),
+    new("danne", "hej", ToUnixTime(DateTime.Now.AddDays(-6))),
+    new("lennart", "och hå", ToUnixTime(DateTime.Now.AddDays(-2))),
+    new("xX_Gandalf_Xx", "YOU SHALL NOT POST!", ToUnixTime(DateTime.Now.AddDays(-1))),
+    new("birgitta69", "är nån vaken?", ToUnixTime(DateTime.Now.AddMinutes(-14))),
+    new("danne", "@birgitta69 jo, jag är vaken", ToUnixTime(DateTime.Now.AddMinutes(-11))),
+    new("max", "@danne snacka inte med min brud!", ToUnixTime(DateTime.Now.AddMinutes(-5))),
 };
 
 var globalCts = new CancellationTokenSource();
@@ -28,9 +33,11 @@ app.MapGet("/api/messages", async (HttpRequest request, CancellationToken ct) =>
 
     if (request.Headers.TryGetValue("X-Poll", out var value) && value == "yes")
     {
-        try {
+        try
+        {
             await Task.Delay(30 * 1000, cts.Token);
-        } catch (TaskCanceledException) { }
+        }
+        catch (TaskCanceledException) { }
     }
     return new { messages };
 });
