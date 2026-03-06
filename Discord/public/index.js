@@ -63,7 +63,7 @@ function getUsernameColor(username) {
         case 0:
             return "#f87777";
         case 1:
-            return "#e3d020";
+            return "#cdb801";
         case 2:
             return "#6b6bf4";
         case 3:
@@ -146,10 +146,10 @@ async function pollOnlyNewMessages() {
             }
         });
 
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
+        if (!messages.ok) {
+            throw new Error(`Response status: ${messages.status}`);
         }
-        const result = await response.json();
+        const result = await messages.json();
         console.log(result.messages);
         return result.messages;
     }
@@ -164,6 +164,7 @@ async function pollMessages() {
     displayMessages(messages);
     setTimeout(pollMessages, messagePollingRateMs);
 }
+
 getMessages()
     .then(displayMessages)
     .then(pollMessages)
