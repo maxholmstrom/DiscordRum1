@@ -63,7 +63,7 @@ function getUsernameColor(username) {
         case 0:
             return "#f87777";
         case 1:
-            return "#e3d020";
+            return "#cdb801";
         case 2:
             return "#6b6bf4";
         case 3:
