@@ -4,21 +4,12 @@ body {
     border-radius: 5px;
     
 }
-
-header {
-    background-color: #dfe1e1;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    border-radius: 8px;
+.header-image{
+    width:100%;
+    height:auto;
+    display:block;
 }
 
-h1 {
-    text-shadow: 2px 1px 2px rgb(0, 0, 0);
-    color: #ffffff;
-    text-shadow: 2px 2px 5px rgb(53, 53, 53);
-}
 
 .container {
     display: flex;
