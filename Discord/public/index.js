@@ -59,7 +59,7 @@ function displayMessages(allMessages ) {
     var messagesContainer = document.querySelector(".messages");
     messagesContainer.innerHTML = "";
     allMessages .forEach(msg => {
-        const date = new Date(msg.time * 1000);
+        const date = new Date(msg.time);
         const formattedDate = date.toLocaleDateString("sv-SE");
         var message = document.createElement("div");
         message.innerHTML = `${msg.user} ${formattedDate.toString()}: ${msg.message}`;

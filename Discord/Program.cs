@@ -25,14 +25,15 @@ app.MapGet("/api/messages", () => new { messages });
 // Post för meddelanden
 app.MapPost("/api/messages", async (MessageDto msg) =>
 {
-    Console.WriteLine($"msg post: {msg.User} {msg.Time}: {msg.Message}");
     if (string.IsNullOrWhiteSpace(msg.Message))
         return Results.BadRequest(new { error = "message får inte vara tom." });
 
     var user = string.IsNullOrWhiteSpace(msg.User) ? "Anonymous" : msg.User.Trim();
     var message = msg.Message.TrimEnd();
 
-    var saved = new MessageDto(user, message);
+    Console.WriteLine($"msg post: {msg.User} {msg.Time}: {msg.Message}");
+
+    var saved = new MessageDto(user, message, msg.Time);
     messages.Add(saved);
 
     return Results.Ok(saved);
