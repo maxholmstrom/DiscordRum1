@@ -30,7 +30,7 @@ app.MapGet("/api/messages", async (HttpRequest request, CancellationToken ct) =>
             await Task.Delay(30 * 1000, cts.Token);
         } catch (TaskCanceledException) { }
     }
-    return Results.Ok(messages);
+    return new { messages };
 });
 
 // Post för meddelanden
