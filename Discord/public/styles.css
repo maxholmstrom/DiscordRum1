@@ -112,6 +112,7 @@ textarea{
     display: flex;
     flex-direction: column;
 }
-.message-div:nth-child(even){
-    align-self: flex-end;
+
+.my-message{
+    align-self:flex-end;
 }

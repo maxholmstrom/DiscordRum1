@@ -115,6 +115,10 @@ function displayMessages(allMessages ) {
     allMessages .forEach(msg => {
         var messageDiv = document.createElement("div");
         messageDiv.classList.add("message-div");
+      // Alla meddelanden från användaren
+        if(msg.user === nameInput.value){
+    messageDiv.classList.add("my-message");
+}
 
         var messageHead = document.createElement("div");
         messageDiv.appendChild(messageHead);
