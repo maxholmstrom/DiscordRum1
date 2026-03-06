@@ -192,7 +192,7 @@ async function pollOnlyNewMessages() {
 async function pollMessages() {
     const messages = await pollOnlyNewMessages();
     displayMessages(messages);
-    setTimeout(pollMessages, messagePollingRateMs);
+    pollMessages();
 }
 
 getMessages()
