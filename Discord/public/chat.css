@@ -2,6 +2,7 @@
     font-size:12px;
     margin-bottom:4px;
     opacity:0.8;
+    overflow-wrap: break-word;
 }
 
 .message-body{
@@ -12,6 +13,7 @@
     width:fit-content;
     box-shadow:0 3px 8px rgba(0, 0, 0, 0.438);
     margin-bottom: 12px;
+    overflow-wrap: break-word;
 }
 
 

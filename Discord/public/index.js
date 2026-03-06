@@ -56,22 +56,33 @@ async function postMessage(msg) {
 }
 
 function getUsernameColor(username) {
-    let charc1 = username.charCodeAt(0);
-    let charc2 = username.charCodeAt(username.length - 1);
-    let cmod = (charc1 + charc2) % 6;
+    let csum = 0;
+    for(let i = 0; i < username.length; i++) {
+        csum += username.charCodeAt(i);
+    }
+    let cmod = Math.floor(csum / username.charCodeAt(0)) % 10;
+    console.log(username, csum, cmod);
     switch(cmod) {
         case 0:
             return "#f87777";
         case 1:
             return "#cdb801";
         case 2:
-            return "#6b6bf4";
+            return "#7c63de";
         case 3:
             return "#7dc000";
         case 4:
             return "#35aa8b";
         case 5:
-            return "#c36ac3";
+            return "#8c2caf";
+        case 6:
+            return "#a65a17";
+        case 7:
+            return "#235eab";
+        case 8:
+            return "#c9129e";
+        case 9:
+            return "#892053";
     }
     return "#ffffff";
 }
@@ -80,33 +91,30 @@ function formatUnixT(time) {
     const curT = Date.now();
 
     const diff = curT - time;
-    const secs = diff / 1000;
-    const mins = secs / 60;
-    const hours = mins / 60;
-    const days = hours / 24;
+    const secs = Math.floor(diff / 1000);
+    const mins = Math.floor(secs / 60);
+    const hours = Math.floor(mins / 60);
+    const days = Math.floor(hours / 24);
 
     if(secs < 60) {
         return "nu";
     }
-    else if(mins < 7) {
-        return "nån minut sen";
+    else if(mins < 2) {
+        return "en minut sen";
     }
-    else if(mins < 15) {
-        return "nån kvart sen";
-    }
-    else if(hours < 1) {
-        return "ett tag sen";
+    else if(mins < 25) {
+        return `${mins} minuter sen`
     }
     else if(days < 1) {
-        return "idag";
-    }
-    else if(days < 2) {
-        return "igår";
+        const date = new Date(time);
+        const formattedTime = date.toLocaleTimeString("sv-SE");
+        return `${formattedTime}`;
     }
 
     const date = new Date(time);
     const formattedDate = date.toLocaleDateString("sv-SE");
-    return `den ${formattedDate}`;
+    const formattedTime = date.toLocaleTimeString("sv-SE");
+    return `${formattedDate} ${formattedTime}`;
 }
 
 function displayMessages(allMessages ) {
