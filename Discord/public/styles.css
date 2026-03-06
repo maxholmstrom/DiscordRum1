@@ -42,6 +42,7 @@ h1 {
 .message-time {
     color: gray;
     font-style: italic;
+    font-size: smaller;
 }
 
 .containerchat {
