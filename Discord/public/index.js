@@ -116,7 +116,7 @@ messageInput.addEventListener("keydown", async (e) => {
 async function pollOnlyNewMessages() {
     try {
         const messages = await fetch(apiUrl + "/messages", {
-            headers: {:
+            headers: {
                 "X-Poll": "yes"
             }
         });
@@ -134,12 +134,12 @@ async function pollOnlyNewMessages() {
     return null;
 }
 
-getMessages();
-
 async function pollMessages() {
-    const messages = await getMessages();
+    const messages = await pollOnlyNewMessages();
     displayMessages(messages);
     setTimeout(pollMessages, messagePollingRateMs);
 }
-
-pollMessages();
+getMessages()
+    .then(displayMessages)
+    .then(pollMessages)
+    .catch(console.error);
