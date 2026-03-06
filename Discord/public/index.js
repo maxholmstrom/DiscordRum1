@@ -1,7 +1,6 @@
 "use strict";
 
-const baseUrl = "http://localhost:3000";
-const apiUrl = baseUrl + "/api";
+const apiUrl = "/api";
 const messagePollingRateMs = 2000;
 
 const sendBtn = document.getElementById("sendBtn");
