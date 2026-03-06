@@ -36,7 +36,7 @@ h1 {
 .messages .message-div {
     padding: 6px 0;
     border-bottom: 1px solid #eee;
-
+    
 }
 
 .message-time {
@@ -58,6 +58,7 @@ h1 {
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
 }
 textarea{
     resize: none;
@@ -107,6 +108,8 @@ textarea{
      display: flex;
     flex-direction: column;
     gap: 5px;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 .messages{
     display: flex;
