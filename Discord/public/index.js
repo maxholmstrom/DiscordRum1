@@ -129,7 +129,9 @@ function displayMessages(allMessages ) {
         if(msg.user === nameInput.value){
         messageDiv.classList.add("my-message");}
 
+        // namn + tid ovanför chatbubblan
         var messageHead = document.createElement("div");
+        messageHead.classList.add("message-head");
         messageDiv.appendChild(messageHead);
 
         var messageUsername = document.createElement("span");
@@ -142,12 +144,13 @@ function displayMessages(allMessages ) {
         messageTime.classList.add("message-time");
         messageHead.appendChild(messageTime);
 
+        // Chatbubblan
         var messageBody = document.createElement("div");
-        messageBody.innerHTML = `${msg.message}`;
+        messageBody.classList.add("message-body");
+        messageBody.innerHTML = msg.message;
         messageDiv.appendChild(messageBody);
-
         messagesContainer.appendChild(messageDiv);
-    });
+        });
 }
 
 async function sendCurrentMessage() {
