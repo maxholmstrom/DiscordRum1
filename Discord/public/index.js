@@ -80,33 +80,30 @@ function formatUnixT(time) {
     const curT = Date.now();
 
     const diff = curT - time;
-    const secs = diff / 1000;
-    const mins = secs / 60;
-    const hours = mins / 60;
-    const days = hours / 24;
+    const secs = Math.floor(diff / 1000);
+    const mins = Math.floor(secs / 60);
+    const hours = Math.floor(mins / 60);
+    const days = Math.floor(hours / 24);
 
     if(secs < 60) {
         return "nu";
     }
-    else if(mins < 7) {
-        return "nån minut sen";
+    else if(mins < 2) {
+        return "en minut sen";
     }
-    else if(mins < 15) {
-        return "nån kvart sen";
-    }
-    else if(hours < 1) {
-        return "ett tag sen";
+    else if(mins < 25) {
+        return `${mins} minuter sen`
     }
     else if(days < 1) {
-        return "idag";
-    }
-    else if(days < 2) {
-        return "igår";
+        const date = new Date(time);
+        const formattedTime = date.toLocaleTimeString("sv-SE");
+        return `${formattedTime}`;
     }
 
     const date = new Date(time);
     const formattedDate = date.toLocaleDateString("sv-SE");
-    return `den ${formattedDate}`;
+    const formattedTime = date.toLocaleTimeString("sv-SE");
+    return `${formattedDate} ${formattedTime}`;
 }
 
 function displayMessages(allMessages ) {
