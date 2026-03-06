@@ -55,6 +55,27 @@ async function postMessage(msg) {
     }
 }
 
+function getUsernameColor(username) {
+    let charc1 = username.charCodeAt(0);
+    let charc2 = username.charCodeAt(username.length - 1);
+    let cmod = (charc1 + charc2) % 6;
+    switch(cmod) {
+        case 0:
+            return "#f87777";
+        case 1:
+            return "#cdb801";
+        case 2:
+            return "#6b6bf4";
+        case 3:
+            return "#7dc000";
+        case 4:
+            return "#35aa8b";
+        case 5:
+            return "#c36ac3";
+    }
+    return "#ffffff";
+}
+
 function displayMessages(allMessages ) {
     var messagesContainer = document.querySelector(".messages");
     messagesContainer.innerHTML = "";
@@ -66,8 +87,12 @@ function displayMessages(allMessages ) {
         messageDiv.classList.add("message-div");
 
         var messageHead = document.createElement("div");
-        messageHead.innerHTML = `${msg.user}`;
         messageDiv.appendChild(messageHead);
+
+        var messageUsername = document.createElement("span");
+        messageUsername.innerHTML = `${msg.user}`;
+        messageUsername.style = `color: ${getUsernameColor(msg.user)}`;
+        messageHead.appendChild(messageUsername);
 
         var messageTime = document.createElement("span");
         messageTime.innerHTML = ` on ${formattedDate.toString()}`;
