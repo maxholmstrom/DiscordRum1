@@ -1,3 +1,5 @@
+"use strict";
+
 const baseUrl = "http://localhost:3000";
 const apiUrl = baseUrl + "/api";
 const messagePollingRateMs = 2000;
