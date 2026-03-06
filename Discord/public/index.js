@@ -62,9 +62,12 @@ function displayMessages(allMessages ) {
         const date = new Date(msg.time);
         const formattedDate = date.toLocaleDateString("sv-SE");
         
+        var messageDiv = document.createElement("div");
+        messageDiv.classList.add("message-div");
+
         var messageHead = document.createElement("div");
         messageHead.innerHTML = `${msg.user}`;
-        messagesContainer.appendChild(messageHead);
+        messageDiv.appendChild(messageHead);
 
         var messageTime = document.createElement("span");
         messageTime.innerHTML = ` on ${formattedDate.toString()}`;
@@ -73,7 +76,9 @@ function displayMessages(allMessages ) {
 
         var messageBody = document.createElement("div");
         messageBody.innerHTML = `${msg.message}`;
-        messagesContainer.appendChild(messageBody);
+        messageDiv.appendChild(messageBody);
+
+        messagesContainer.appendChild(messageDiv);
     });
 }
 
