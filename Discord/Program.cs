@@ -20,11 +20,15 @@ var messages = new List<MessageDto>(){
 };
 
 // Get för meddelanden
-app.MapGet("/api/messages", async (HttpRequest request) =>
+app.MapGet("/api/messages", async (HttpRequest request, CancellationToken ct) =>
 {
+    using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct, app.Lifetime.ApplicationStopping);
+
     if (request.Headers.TryGetValue("X-Poll", out var value) && value == "yes")
     {
-        await Task.Delay(5000);
+        try {
+            await Task.Delay(30 * 1000, cts.Token);
+        } catch (TaskCanceledException) { }
     }
     return Results.Ok(messages);
 });
