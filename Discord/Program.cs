@@ -29,7 +29,7 @@ var globalCts = new CancellationTokenSource();
 // Get för meddelanden
 app.MapGet("/api/messages", async (HttpRequest request, CancellationToken ct) =>
 {
-    using var cts = CancellationTokenSource.CreateLinkedTokenSource(globalCts.Token, app.Lifetime.ApplicationStopping);
+    using var cts = CancellationTokenSource.CreateLinkedTokenSource(globalCts.Token, app.Lifetime.ApplicationStopping, ct);
 
     if (request.Headers.TryGetValue("X-Poll", out var value) && value == "yes")
     {
