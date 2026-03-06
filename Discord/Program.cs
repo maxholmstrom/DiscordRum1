@@ -20,7 +20,14 @@ var messages = new List<MessageDto>(){
 };
 
 // Get för meddelanden
-app.MapGet("/api/messages", () => new { messages });
+app.MapGet("/api/messages", async (HttpRequest request) =>
+{
+    if (request.Headers.TryGetValue("X-Poll", out var value) && value == "yes")
+    {
+        await Task.Delay(5000);
+    }
+    return Results.Ok(messages);
+});
 
 // Post för meddelanden
 app.MapPost("/api/messages", async (MessageDto msg) =>
