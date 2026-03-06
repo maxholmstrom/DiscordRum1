@@ -114,11 +114,33 @@ messageInput.addEventListener("keydown", async (e) => {
   }
 });
 
-getMessages().catch(console.error);
+async function pollOnlyNewMessages() {
+    try {
+        const messages = await fetch(apiUrl + "/messages", {
+            headers: {
+                "X-Poll" : "yes"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log(result.messages);
+        return result.messages;
+    }
+    catch (error) {
+        console.error(error.message);
+    }
+    return null;
+}
+
 async function pollMessages() {
-    const messages = await getMessages();
+    const messages = await pollOnlyNewMessages();
     displayMessages(messages);
     setTimeout(pollMessages, messagePollingRateMs);
 }
 
+getMessages();
+displayMessages();
 pollMessages();
