@@ -33,7 +33,7 @@ h1 {
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-.messages div {
+.messages .message-div {
     padding: 6px 0;
     border-bottom: 1px solid #eee;
 
