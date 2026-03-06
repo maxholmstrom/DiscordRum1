@@ -76,13 +76,43 @@ function getUsernameColor(username) {
     return "#ffffff";
 }
 
+function formatUnixT(time) {
+    const curT = Date.now();
+
+    const diff = curT - time;
+    const secs = diff / 1000;
+    const mins = secs / 60;
+    const hours = mins / 60;
+    const days = hours / 24;
+
+    if(secs < 60) {
+        return "nu";
+    }
+    else if(mins < 7) {
+        return "nån minut sen";
+    }
+    else if(mins < 15) {
+        return "nån kvart sen";
+    }
+    else if(hours < 1) {
+        return "ett tag sen";
+    }
+    else if(days < 1) {
+        return "idag";
+    }
+    else if(days < 2) {
+        return "igår";
+    }
+
+    const date = new Date(time);
+    const formattedDate = date.toLocaleDateString("sv-SE");
+    return `den ${formattedDate}`;
+}
+
 function displayMessages(allMessages ) {
     var messagesContainer = document.querySelector(".messages");
     messagesContainer.innerHTML = "";
     allMessages .forEach(msg => {
-        const date = new Date(msg.time);
-        const formattedDate = date.toLocaleDateString("sv-SE");
-        
         var messageDiv = document.createElement("div");
         messageDiv.classList.add("message-div");
 
@@ -95,7 +125,7 @@ function displayMessages(allMessages ) {
         messageHead.appendChild(messageUsername);
 
         var messageTime = document.createElement("span");
-        messageTime.innerHTML = ` on ${formattedDate.toString()}`;
+        messageTime.innerHTML = ` ${formatUnixT(msg.time)}`;
         messageTime.classList.add("message-time");
         messageHead.appendChild(messageTime);
 
