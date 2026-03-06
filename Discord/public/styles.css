@@ -4,10 +4,12 @@ body {
     border-radius: 5px;
     
 }
-.header-image{
-    width:100%;
-    height:auto;
-    display:block;
+header{
+    background-image: url("birgichat.png");
+    background-size: cover;
+    background-position: center;
+    height: 132px; 
+    background-position: center 30%;
 }
 
 
