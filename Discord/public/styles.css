@@ -44,3 +44,20 @@ h1 {
     font-style: italic;
     font-size: smaller;
 }
+
+.containerchat {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#messageInput {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+textarea{
+    resize: none;
+}
